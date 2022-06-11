@@ -1,0 +1,30 @@
+server:
+  port: 9000
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          openid_test:
+            client-id: openid_test
+            client-secret: password
+            authorization-grant-type: authorization_code
+            scope: email,openid
+            redirect-uri: http://localhost:9000/login/oauth2/code/openid_test
+            client-authentication-method: Basic
+            client-name: clientName
+        provider:
+          openid_test:
+            authorization-uri: http://localhost:8080/openam/oauth2/authorize
+            user-info-uri:  http://localhost:8080/openam/oauth2/userinfo
+            token-uri: http://localhost:8080/openam/oauth2/access_token
+            jwk-set-uri: http://localhost:8080/openam/oauth2/connect/jwk_uri
+            user-name-attribute: sub
+            user-info-authentication-method: authorization_code
+
+# http://localhost:9000/private
+
+logging:
+  level:
+    root: DEBUG
